@@ -55,51 +55,51 @@ source .venv/bin/activate
 
 Para criar uma nova feature:
 ```bash
-python git_for_developer.py create <numero_demanda> <nome_demanda>
+python gfd.py create <numero_demanda> <nome_demanda>
 ```
 
 Para atualizar sua feature com a master:
 ```bash
-python git_for_developer.py update
+python gfd.py update
 ```
 
 Para enviar sua branch para o servidor:
 ```bash
-python git_for_developer.py push
+python gfd.py push
 ```
 
 Para listar todas as branches de feature e bug:
 ```bash
-python git_for_developer.py list
+python gfd.py list
 ```
 
 Para trocar para outra branch de feature ou bug:
 ```bash
-python git_for_developer.py switch
+python gfd.py switch
 ```
 
 ## Fluxo de Trabalho Recomendado
 
 1. Crie uma nova feature:
    ```bash
-   python git_for_developer.py create 123 "nome-da-demanda"
+   python gfd.py create 123 "nome-da-demanda"
    ```
 
 2. Faça suas alterações e commits localmente
 
 3. Quando quiser atualizar sua branch com a master:
    ```bash
-   python git_for_developer.py update
+   python gfd.py update
    ```
 
 4. Quando quiser enviar suas alterações para o servidor:
    ```bash
-   python git_for_developer.py push
+   python gfd.py push
    ```
 
 5. Para trocar entre diferentes demandas:
    ```bash
-   python git_for_developer.py switch
+   python gfd.py switch
    ```
    - Selecione a demanda desejada na lista numerada
    - Digite 0 para cancelar a operação
