@@ -209,8 +209,7 @@ def main():
         print_info("  create <numero_demanda> <nome_demanda> - Cria uma nova branch de feature")
         print_info("  update - Atualiza a branch atual com a master")
         print_info("  push - Envia a branch atual para o servidor")
-        print_info("  list - Lista todas as branches de feature e bug")
-        print_info("  switch - Troca para outra branch de feature ou bug")
+        print_info("  list - Lista todas as branches de feature e bug e permite trocar entre elas")
         sys.exit(1)
     
     command = sys.argv[1].lower()
@@ -228,9 +227,6 @@ def main():
         push_feature_branch()
     
     elif command == 'list':
-        list_branches()
-    
-    elif command == 'switch':
         list_branches()
     
     else:

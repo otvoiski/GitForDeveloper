@@ -56,8 +56,7 @@ Após a instalação, você poderá usar o comando `gfd` de qualquer diretório 
 - Pull automático da branch master antes de criar uma nova feature
 - Atualização automática da branch de feature com a master
 - Envio automático da branch para o servidor remoto
-- Listagem de todas as branches de feature e bug
-- Troca fácil entre diferentes branches de feature e bug
+- Listagem de todas as branches de feature e bug com opção de troca entre elas
 
 ## Como usar
 
@@ -88,14 +87,9 @@ Para enviar sua branch para o servidor:
 gfd push
 ```
 
-Para listar todas as branches de feature e bug:
+Para listar todas as branches de feature e bug e trocar entre elas:
 ```bash
 gfd list
-```
-
-Para trocar para outra branch de feature ou bug:
-```bash
-gfd switch
 ```
 
 ## Fluxo de Trabalho Recomendado
@@ -117,9 +111,9 @@ gfd switch
    gfd push
    ```
 
-5. Para trocar entre diferentes demandas:
+5. Para listar e trocar entre diferentes demandas:
    ```bash
-   gfd switch
+   gfd list
    ```
    - Selecione a demanda desejada na lista numerada
    - Digite 0 para cancelar a operação
