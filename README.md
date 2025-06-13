@@ -31,6 +31,15 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Funcionalidades
+
+- Criação automática de branches de feature com o padrão `feature/NUMERO_DEMANDA/NOME_DA_DEMANDA`
+- Pull automático da branch master antes de criar uma nova feature
+- Atualização automática da branch de feature com a master
+- Envio automático da branch para o servidor remoto
+- Listagem de todas as branches de feature e bug
+- Troca fácil entre diferentes branches de feature e bug
+
 ## Como usar
 
 1. Ative o ambiente virtual (se ainda não estiver ativo):
@@ -42,10 +51,58 @@ pip install -r requirements.txt
 source .venv/bin/activate
 ```
 
-2. Execute o script:
+2. Execute o script com os seguintes comandos:
+
+Para criar uma nova feature:
 ```bash
-python git_for_developer.py
+python git_for_developer.py create <numero_demanda> <nome_demanda>
 ```
+
+Para atualizar sua feature com a master:
+```bash
+python git_for_developer.py update
+```
+
+Para enviar sua branch para o servidor:
+```bash
+python git_for_developer.py push
+```
+
+Para listar todas as branches de feature e bug:
+```bash
+python git_for_developer.py list
+```
+
+Para trocar para outra branch de feature ou bug:
+```bash
+python git_for_developer.py switch
+```
+
+## Fluxo de Trabalho Recomendado
+
+1. Crie uma nova feature:
+   ```bash
+   python git_for_developer.py create 123 "nome-da-demanda"
+   ```
+
+2. Faça suas alterações e commits localmente
+
+3. Quando quiser atualizar sua branch com a master:
+   ```bash
+   python git_for_developer.py update
+   ```
+
+4. Quando quiser enviar suas alterações para o servidor:
+   ```bash
+   python git_for_developer.py push
+   ```
+
+5. Para trocar entre diferentes demandas:
+   ```bash
+   python git_for_developer.py switch
+   ```
+   - Selecione a demanda desejada na lista numerada
+   - Digite 0 para cancelar a operação
 
 ## Desenvolvimento
 
