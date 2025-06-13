@@ -1,73 +1,72 @@
-# GitForDeveloper
+# Git for Developer
 
-Uma ferramenta de linha de comando para automatizar o gerenciamento de branches Git, desenvolvida para facilitar o fluxo de trabalho dos desenvolvedores.
+Uma ferramenta para ajudar desenvolvedores a trabalhar com Git de forma mais eficiente.
 
-## Funcionalidades
+## Requisitos
 
-- Criação automática de branches de feature com o padrão `feature/NUMERO_DEMANDA/NOME_DA_DEMANDA`
-- Pull automático da branch master antes de criar uma nova feature
-- Atualização automática da branch de feature com a master
-- Envio automático da branch para o servidor remoto
-- Listagem de todas as branches de feature e bug
-- Troca fácil entre diferentes branches de feature e bug
+- Python 3.8 ou superior
+- Git instalado no sistema
 
 ## Instalação
 
-1. Clone este repositório
-2. Instale as dependências:
+1. Clone este repositório:
+```bash
+git clone https://github.com/seu-usuario/git-for-developer.git
+cd git-for-developer
+```
+
+2. Crie um ambiente virtual (venv):
+```bash
+# No Windows
+python -m venv .venv
+.venv\Scripts\activate
+
+# No Linux/Mac
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+3. Instale as dependências:
 ```bash
 pip install -r requirements.txt
 ```
 
-## Uso
+## Como usar
 
-Para criar uma nova feature:
+1. Ative o ambiente virtual (se ainda não estiver ativo):
 ```bash
-python git_for_developer.py create <numero_demanda> <nome_demanda>
+# No Windows
+.venv\Scripts\activate
+
+# No Linux/Mac
+source .venv/bin/activate
 ```
 
-Para atualizar sua feature com a master:
+2. Execute o script:
 ```bash
-python git_for_developer.py update
+python git_for_developer.py
 ```
 
-Para enviar sua branch para o servidor:
+## Desenvolvimento
+
+Para contribuir com o projeto:
+
+1. Crie uma branch para sua feature:
 ```bash
-python git_for_developer.py push
+git checkout -b feature/nova-funcionalidade
 ```
 
-Para listar todas as branches de feature e bug:
+2. Faça suas alterações e commit:
 ```bash
-python git_for_developer.py list
+git add .
+git commit -m "Adiciona nova funcionalidade"
 ```
 
-Para trocar para outra branch de feature ou bug:
+3. Envie suas alterações:
 ```bash
-python git_for_developer.py switch
+git push origin feature/nova-funcionalidade
 ```
 
-## Fluxo de Trabalho Recomendado
+## Licença
 
-1. Crie uma nova feature:
-   ```bash
-   python git_for_developer.py create 123 "nome-da-demanda"
-   ```
-
-2. Faça suas alterações e commits localmente
-
-3. Quando quiser atualizar sua branch com a master:
-   ```bash
-   python git_for_developer.py update
-   ```
-
-4. Quando quiser enviar suas alterações para o servidor:
-   ```bash
-   python git_for_developer.py push
-   ```
-
-5. Para trocar entre diferentes demandas:
-   ```bash
-   python git_for_developer.py switch
-   ```
-   - Selecione a demanda desejada na lista numerada
-   - Digite 0 para cancelar a operação 
+Este projeto está sob a licença MIT.
