@@ -3,6 +3,7 @@ import sys
 import os
 from git import Repo
 from colorama import init, Fore, Style
+import re
 
 # Inicializa o colorama para Windows
 init()
@@ -124,6 +125,83 @@ def push_feature_branch():
         print_error(f"Erro ao enviar branch: {str(e)}")
         sys.exit(1)
 
+def list_branches():
+    repo = get_current_repo()
+    
+    try:
+        # Obtém todas as branches locais
+        branches = [branch.name for branch in repo.heads]
+        
+        # Filtra apenas branches de feature e bug
+        feature_branches = []
+        bug_branches = []
+        
+        for branch in branches:
+            if branch.startswith('feature/'):
+                feature_branches.append(branch)
+            elif branch.startswith('bug/'):
+                bug_branches.append(branch)
+        
+        if not feature_branches and not bug_branches:
+            print_info("Não foram encontradas branches de feature ou bug.")
+            return
+        
+        print_info("\nSelecione a demanda que deseja mudar:")
+        
+        # Lista branches de feature
+        for i, branch in enumerate(feature_branches, 1):
+            parts = branch.split('/')
+            if len(parts) >= 3:
+                numero = parts[1]
+                titulo = ' '.join(parts[2:]).replace('_', ' ').title()
+                print(f"{i}. [{Fore.GREEN}FEATURE{Style.RESET_ALL}] [{numero}] - {titulo}")
+        
+        # Lista branches de bug
+        for i, branch in enumerate(bug_branches, len(feature_branches) + 1):
+            parts = branch.split('/')
+            if len(parts) >= 3:
+                numero = parts[1]
+                titulo = ' '.join(parts[2:]).replace('_', ' ').title()
+                print(f"{i}. [{Fore.RED}BUG{Style.RESET_ALL}] [{numero}] - {titulo}")
+        
+        # Solicita seleção do usuário
+        while True:
+            try:
+                choice = int(input("\nDigite o número da demanda (ou 0 para cancelar): "))
+                if choice == 0:
+                    return
+                
+                all_branches = feature_branches + bug_branches
+                if 1 <= choice <= len(all_branches):
+                    selected_branch = all_branches[choice - 1]
+                    switch_to_branch(selected_branch)
+                    break
+                else:
+                    print_error("Opção inválida. Por favor, tente novamente.")
+            except ValueError:
+                print_error("Por favor, digite um número válido.")
+        
+    except Exception as e:
+        print_error(f"Erro ao listar branches: {str(e)}")
+        sys.exit(1)
+
+def switch_to_branch(branch_name):
+    repo = get_current_repo()
+    
+    try:
+        # Verifica se há alterações não commitadas
+        if repo.is_dirty():
+            print_error("Existem alterações não commitadas. Por favor, faça commit das suas alterações primeiro.")
+            sys.exit(1)
+        
+        print_info(f"Trocando para a branch {branch_name}...")
+        repo.git.checkout(branch_name)
+        print_success(f"Trocou com sucesso para a branch {branch_name}")
+        
+    except Exception as e:
+        print_error(f"Erro ao trocar de branch: {str(e)}")
+        sys.exit(1)
+
 def main():
     if len(sys.argv) < 2:
         print_error("Uso: python git_for_developer.py <comando> [argumentos]")
@@ -131,6 +209,8 @@ def main():
         print_info("  create <numero_demanda> <nome_demanda> - Cria uma nova branch de feature")
         print_info("  update - Atualiza a branch atual com a master")
         print_info("  push - Envia a branch atual para o servidor")
+        print_info("  list - Lista todas as branches de feature e bug")
+        print_info("  switch - Troca para outra branch de feature ou bug")
         sys.exit(1)
     
     command = sys.argv[1].lower()
@@ -146,6 +226,12 @@ def main():
     
     elif command == 'push':
         push_feature_branch()
+    
+    elif command == 'list':
+        list_branches()
+    
+    elif command == 'switch':
+        list_branches()
     
     else:
         print_error(f"Comando desconhecido: {command}")

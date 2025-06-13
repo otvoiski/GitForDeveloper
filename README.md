@@ -8,6 +8,8 @@ Uma ferramenta de linha de comando para automatizar o gerenciamento de branches 
 - Pull automático da branch master antes de criar uma nova feature
 - Atualização automática da branch de feature com a master
 - Envio automático da branch para o servidor remoto
+- Listagem de todas as branches de feature e bug
+- Troca fácil entre diferentes branches de feature e bug
 
 ## Instalação
 
@@ -34,6 +36,16 @@ Para enviar sua branch para o servidor:
 python git_for_developer.py push
 ```
 
+Para listar todas as branches de feature e bug:
+```bash
+python git_for_developer.py list
+```
+
+Para trocar para outra branch de feature ou bug:
+```bash
+python git_for_developer.py switch
+```
+
 ## Fluxo de Trabalho Recomendado
 
 1. Crie uma nova feature:
@@ -51,4 +63,11 @@ python git_for_developer.py push
 4. Quando quiser enviar suas alterações para o servidor:
    ```bash
    python git_for_developer.py push
-   ``` 
+   ```
+
+5. Para trocar entre diferentes demandas:
+   ```bash
+   python git_for_developer.py switch
+   ```
+   - Selecione a demanda desejada na lista numerada
+   - Digite 0 para cancelar a operação 
