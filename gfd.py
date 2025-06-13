@@ -204,7 +204,7 @@ def switch_to_branch(branch_name):
 
 def main():
     if len(sys.argv) < 2:
-        print_error("Uso: python git_for_developer.py <comando> [argumentos]")
+        print_error("Uso: gfd <comando> [argumentos]")
         print_info("Comandos disponíveis:")
         print_info("  create <numero_demanda> <nome_demanda> - Cria uma nova branch de feature")
         print_info("  update - Atualiza a branch atual com a master")
@@ -217,7 +217,7 @@ def main():
     
     if command == 'create':
         if len(sys.argv) != 4:
-            print_error("Uso: python git_for_developer.py create <numero_demanda> <nome_demanda>")
+            print_error("Uso: gfd create <numero_demanda> <nome_demanda>")
             sys.exit(1)
         create_feature_branch(sys.argv[2], sys.argv[3])
     

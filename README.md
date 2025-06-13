@@ -9,6 +9,8 @@ Uma ferramenta para ajudar desenvolvedores a trabalhar com Git de forma mais efi
 
 ## Instalação
 
+### Instalação Local (Recomendada para Desenvolvimento)
+
 1. Clone este repositório:
 ```bash
 git clone https://github.com/seu-usuario/git-for-developer.git
@@ -31,6 +33,23 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### Instalação Global (Recomendada para Uso)
+
+Para instalar o comando `gfd` globalmente no seu sistema:
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/git-for-developer.git
+cd git-for-developer
+```
+
+2. Instale o pacote em modo de desenvolvimento:
+```bash
+pip install -e .
+```
+
+Após a instalação, você poderá usar o comando `gfd` de qualquer diretório do seu sistema.
+
 ## Funcionalidades
 
 - Criação automática de branches de feature com o padrão `feature/NUMERO_DEMANDA/NOME_DA_DEMANDA`
@@ -42,64 +61,65 @@ pip install -r requirements.txt
 
 ## Como usar
 
-1. Ative o ambiente virtual (se ainda não estiver ativo):
+### Se instalado globalmente:
 ```bash
-# No Windows
-.venv\Scripts\activate
-
-# No Linux/Mac
-source .venv/bin/activate
+gfd <comando> [argumentos]
 ```
 
-2. Execute o script com os seguintes comandos:
+### Se usando localmente:
+```bash
+python gfd.py <comando> [argumentos]
+```
+
+Comandos disponíveis:
 
 Para criar uma nova feature:
 ```bash
-python gfd.py create <numero_demanda> <nome_demanda>
+gfd create <numero_demanda> <nome_demanda>
 ```
 
 Para atualizar sua feature com a master:
 ```bash
-python gfd.py update
+gfd update
 ```
 
 Para enviar sua branch para o servidor:
 ```bash
-python gfd.py push
+gfd push
 ```
 
 Para listar todas as branches de feature e bug:
 ```bash
-python gfd.py list
+gfd list
 ```
 
 Para trocar para outra branch de feature ou bug:
 ```bash
-python gfd.py switch
+gfd switch
 ```
 
 ## Fluxo de Trabalho Recomendado
 
 1. Crie uma nova feature:
    ```bash
-   python gfd.py create 123 "nome-da-demanda"
+   gfd create 123 "nome-da-demanda"
    ```
 
 2. Faça suas alterações e commits localmente
 
 3. Quando quiser atualizar sua branch com a master:
    ```bash
-   python gfd.py update
+   gfd update
    ```
 
 4. Quando quiser enviar suas alterações para o servidor:
    ```bash
-   python gfd.py push
+   gfd push
    ```
 
 5. Para trocar entre diferentes demandas:
    ```bash
-   python gfd.py switch
+   gfd switch
    ```
    - Selecione a demanda desejada na lista numerada
    - Digite 0 para cancelar a operação
