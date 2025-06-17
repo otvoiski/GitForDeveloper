@@ -24,11 +24,17 @@ def get_current_repo():
         print_error("Não foi possível encontrar um repositório Git válido no diretório atual.")
         sys.exit(1)
 
-def create_feature_branch(numero_demanda, nome_demanda):
+def create_branch(branch_type, numero_demanda, nome_demanda):
     repo = get_current_repo()
     
+    # Valida o tipo de branch
+    valid_types = ['feature', 'bug', 'release']
+    if branch_type.lower() not in valid_types:
+        print_error(f"Tipo de branch inválido. Use um dos seguintes: {', '.join(valid_types)}")
+        sys.exit(1)
+    
     # Formata o nome da branch
-    branch_name = f"feature/{numero_demanda}/{nome_demanda.lower().replace(' ', '_')}"
+    branch_name = f"{branch_type.lower()}/{numero_demanda}/{nome_demanda.lower().replace(' ', '_')}"
     
     print_info(f"Criando nova branch: {branch_name}")
     
@@ -206,7 +212,8 @@ def main():
     if len(sys.argv) < 2:
         print_error("Uso: gfd <comando> [argumentos]")
         print_info("Comandos disponíveis:")
-        print_info("  create <numero_demanda> <nome_demanda> - Cria uma nova branch de feature")
+        print_info("  create <tipo> <numero_demanda> <nome_demanda> - Cria uma nova branch")
+        print_info("    tipos disponíveis: feature, bug, release")
         print_info("  update [-m|--merge <branch>] - Atualiza a branch atual com a master ou outra branch especificada")
         print_info("  push - Envia a branch atual para o servidor")
         print_info("  list - Lista todas as branches de feature e bug e permite trocar entre elas")
@@ -215,10 +222,11 @@ def main():
     command = sys.argv[1].lower()
     
     if command == 'create':
-        if len(sys.argv) != 4:
-            print_error("Uso: gfd create <numero_demanda> <nome_demanda>")
+        if len(sys.argv) != 5:
+            print_error("Uso: gfd create <tipo> <numero_demanda> <nome_demanda>")
+            print_info("Tipos disponíveis: feature, bug, release")
             sys.exit(1)
-        create_feature_branch(sys.argv[2], sys.argv[3])
+        create_branch(sys.argv[2], sys.argv[3], sys.argv[4])
     
     elif command == 'update':
         merge_branch = 'master'

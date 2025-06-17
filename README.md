@@ -52,9 +52,9 @@ Após a instalação, você poderá usar o comando `gfd` de qualquer diretório 
 
 ## Funcionalidades
 
-- Criação automática de branches de feature com o padrão `feature/NUMERO_DEMANDA/NOME_DA_DEMANDA`
-- Pull automático da branch master antes de criar uma nova feature
-- Atualização automática da branch de feature com a master ou outra branch especificada
+- Criação automática de branches com diferentes tipos (feature, bug, release)
+- Pull automático da branch master antes de criar uma nova branch
+- Atualização automática da branch com a master ou outra branch especificada
 - Envio automático da branch para o servidor remoto
 - Listagem de todas as branches de feature e bug com opção de troca entre elas
 
@@ -72,12 +72,19 @@ python gfd.py <comando> [argumentos]
 
 Comandos disponíveis:
 
-Para criar uma nova feature:
+Para criar uma nova branch:
 ```bash
-gfd create <numero_demanda> <nome_demanda>
+# Criar uma branch de feature
+gfd create feature <numero_demanda> <nome_demanda>
+
+# Criar uma branch de bug
+gfd create bug <numero_demanda> <nome_demanda>
+
+# Criar uma branch de release
+gfd create release <numero_demanda> <nome_demanda>
 ```
 
-Para atualizar sua feature com a master (padrão) ou outra branch:
+Para atualizar sua branch com a master (padrão) ou outra branch:
 ```bash
 # Atualiza com a master (padrão)
 gfd update
@@ -100,9 +107,16 @@ gfd list
 
 ## Fluxo de Trabalho Recomendado
 
-1. Crie uma nova feature:
+1. Crie uma nova branch:
    ```bash
-   gfd create 123 "nome-da-demanda"
+   # Para uma nova feature
+   gfd create feature 123 "nome-da-demanda"
+   
+   # Para um bug
+   gfd create bug 456 "corrigir-problema"
+   
+   # Para uma release
+   gfd create release 789 "versao-1.0.0"
    ```
 
 2. Faça suas alterações e commits localmente
