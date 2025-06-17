@@ -49,15 +49,15 @@ def create_feature_branch(numero_demanda, nome_demanda):
         print_error(f"Erro ao criar branch: {str(e)}")
         sys.exit(1)
 
-def update_feature_branch():
+def update_feature_branch(merge_branch='master'):
     repo = get_current_repo()
     
     try:
         # Obtém o nome da branch atual
         current_branch = repo.active_branch.name
         
-        if current_branch == 'master':
-            print_error("Você está na branch master. Por favor, mude para uma branch de feature primeiro.")
+        if current_branch == merge_branch:
+            print_error(f"Você está na branch {merge_branch}. Por favor, mude para uma branch de feature primeiro.")
             sys.exit(1)
         
         print_info(f"Atualizando branch {current_branch}...")
@@ -70,15 +70,15 @@ def update_feature_branch():
         else:
             has_stash = False
         
-        # Atualiza a master
-        print_info("Atualizando master...")
-        repo.git.checkout('master')
+        # Atualiza a branch de merge
+        print_info(f"Atualizando {merge_branch}...")
+        repo.git.checkout(merge_branch)
         repo.git.pull()
         
         # Volta para a branch de feature e faz merge
-        print_info(f"Fazendo merge com master na branch {current_branch}...")
+        print_info(f"Fazendo merge com {merge_branch} na branch {current_branch}...")
         repo.git.checkout(current_branch)
-        repo.git.merge('master')
+        repo.git.merge(merge_branch)
         
         # Restaura alterações locais se necessário
         if has_stash:
@@ -207,7 +207,7 @@ def main():
         print_error("Uso: gfd <comando> [argumentos]")
         print_info("Comandos disponíveis:")
         print_info("  create <numero_demanda> <nome_demanda> - Cria uma nova branch de feature")
-        print_info("  update - Atualiza a branch atual com a master")
+        print_info("  update [-m|--merge <branch>] - Atualiza a branch atual com a master ou outra branch especificada")
         print_info("  push - Envia a branch atual para o servidor")
         print_info("  list - Lista todas as branches de feature e bug e permite trocar entre elas")
         sys.exit(1)
@@ -221,7 +221,17 @@ def main():
         create_feature_branch(sys.argv[2], sys.argv[3])
     
     elif command == 'update':
-        update_feature_branch()
+        merge_branch = 'master'
+        if len(sys.argv) > 2:
+            if sys.argv[2] in ['-m', '--merge']:
+                if len(sys.argv) != 4:
+                    print_error("Uso: gfd update [-m|--merge <branch>]")
+                    sys.exit(1)
+                merge_branch = sys.argv[3]
+            else:
+                print_error("Uso: gfd update [-m|--merge <branch>]")
+                sys.exit(1)
+        update_feature_branch(merge_branch)
     
     elif command == 'push':
         push_feature_branch()

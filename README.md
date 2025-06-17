@@ -54,7 +54,7 @@ Após a instalação, você poderá usar o comando `gfd` de qualquer diretório 
 
 - Criação automática de branches de feature com o padrão `feature/NUMERO_DEMANDA/NOME_DA_DEMANDA`
 - Pull automático da branch master antes de criar uma nova feature
-- Atualização automática da branch de feature com a master
+- Atualização automática da branch de feature com a master ou outra branch especificada
 - Envio automático da branch para o servidor remoto
 - Listagem de todas as branches de feature e bug com opção de troca entre elas
 
@@ -77,9 +77,15 @@ Para criar uma nova feature:
 gfd create <numero_demanda> <nome_demanda>
 ```
 
-Para atualizar sua feature com a master:
+Para atualizar sua feature com a master (padrão) ou outra branch:
 ```bash
+# Atualiza com a master (padrão)
 gfd update
+
+# Atualiza com uma branch específica
+gfd update -m <branch>
+# ou
+gfd update --merge <branch>
 ```
 
 Para enviar sua branch para o servidor:
@@ -101,9 +107,13 @@ gfd list
 
 2. Faça suas alterações e commits localmente
 
-3. Quando quiser atualizar sua branch com a master:
+3. Quando quiser atualizar sua branch:
    ```bash
+   # Atualiza com a master
    gfd update
+   
+   # Ou atualiza com outra branch
+   gfd update -m feature/outra-demanda
    ```
 
 4. Quando quiser enviar suas alterações para o servidor:
