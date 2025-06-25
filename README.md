@@ -13,7 +13,7 @@ Uma ferramenta para ajudar desenvolvedores a trabalhar com Git de forma mais efi
 
 1. Clone este repositório:
 ```bash
-git clone https://github.com/seu-usuario/git-for-developer.git
+git clone https://github.com/otvoiski/GitForDeveloper.git
 cd git-for-developer
 ```
 
@@ -39,7 +39,7 @@ Para instalar o comando `gfd` globalmente no seu sistema:
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/otvoiski/GitForDeveloper
+git clone https://github.com/otvoiski/GitForDeveloper.git
 cd git-for-developer
 ```
 
