@@ -39,7 +39,7 @@ Para instalar o comando `gfd` globalmente no seu sistema:
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/git-for-developer.git
+git clone https://github.com/otvoiski/GitForDeveloper
 cd git-for-developer
 ```
 
